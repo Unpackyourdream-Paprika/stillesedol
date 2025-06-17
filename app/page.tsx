@@ -127,7 +127,7 @@ export default function Home() {
         >
           <div className="relative flex items-center justify-center w-full gap-2 md:gap-4">
             {/* Left GIF */}
-            <Link
+            {/* <Link
               href="https://smartstore.naver.com/donquiniku/products/11852523127"
               target="_blank"
               rel="noopener noreferrer"
@@ -141,7 +141,7 @@ export default function Home() {
                 height={250}
                 className="w-full h-auto rounded-lg"
               />
-            </Link>
+            </Link> */}
 
             {/* Logo */}
             <div
@@ -161,7 +161,7 @@ export default function Home() {
             </div>
 
             {/* Right GIF */}
-            <Link
+            {/* <Link
               href="https://smartstore.naver.com/donquiniku/products/11854994885"
               target="_blank"
               rel="noopener noreferrer"
@@ -175,7 +175,7 @@ export default function Home() {
                 height={250}
                 className="w-full h-auto rounded-lg"
               />
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="flex items-center justify-center w-full gap-2 p-4 bg-black md:hidden">

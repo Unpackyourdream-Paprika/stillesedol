@@ -1,17 +1,33 @@
-import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { NextResponse } from "next/server";
+import OpenAI from "openai";
 export const dynamic = "force-dynamic"; // ⬅️ 핵심!
 
 // List of predefined Kanye-related names (fallback)
-const kanyeNames = [
-  'YeGenius', 'Pablo', 'Yeezus', '808s', 'YeDonda', 
-  'KanyeFan', 'YeVision', 'YeezyBoost', '칸예팬', '예스터',
-  'GradMan', 'CollegeYe', 'LifePablo', 'YeWest', '웨스트팬',
-  'YeCreator', 'DondaSon', '예술가', '칸예사랑', 'YeLover'
+const uwakNames = [
+  "니세돌님",
+  "망상가좌",
+  "초월자충",
+  "반쯤뜬눈러",
+  "이탈자님",
+  "세계멸망러",
+  "니예언자",
+  "탈출선도자",
+  "은하귀환자",
+  "불신자코어",
+  "세카이님",
+  "이세닉러",
+  "세계수신자",
+  "니트킹",
+  "지구망령각",
+  "니우주충",
+  "전도자좌",
+  "연성자찐",
+  "니세러버",
+  "우앜각성자",
 ];
 
 // Initialize OpenAI client if API key is available
-const openai = process.env.OPENAI_API_KEY 
+const openai = process.env.OPENAI_API_KEY
   ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
   : null;
 
@@ -56,10 +72,10 @@ export async function GET() {
         // OpenAI API 호출 실패 시 fallback으로 진행
       }
     }
-    
+
     // Fallback: 미리 정의된 배열에서 랜덤하게 선택
-    const randomIndex = Math.floor(Math.random() * kanyeNames.length);
-    const name = kanyeNames[randomIndex];
+    const randomIndex = Math.floor(Math.random() * uwakNames.length);
+    const name = uwakNames[randomIndex];
     console.log("name:", name);
 
     return NextResponse.json(
@@ -71,10 +87,10 @@ export async function GET() {
       }
     );
   } catch (error) {
-    console.error('이름 생성 중 오류 발생:', error);
+    console.error("이름 생성 중 오류 발생:", error);
     return NextResponse.json(
-      { error: '이름 생성에 실패했습니다' },
+      { error: "이름 생성에 실패했습니다" },
       { status: 500 }
     );
   }
-} 
+}
