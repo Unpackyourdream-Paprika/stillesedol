@@ -280,13 +280,13 @@ const MobileSignatureWall = forwardRef<
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+        <div className="w-12 h-12 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
       </div>
     );
   }
 
   if (error) {
-    return <div className="text-center text-red-500 py-4">{error}</div>;
+    return <div className="py-4 text-center text-red-500">{error}</div>;
   }
 
   // 페이지 번호 생성 (모바일용 간소화)
@@ -332,7 +332,7 @@ const MobileSignatureWall = forwardRef<
 
         {/* 페이지네이션 컨트롤 */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 py-6 px-4">
+          <div className="flex items-center justify-center gap-2 px-4 py-6">
             {/* 이전 페이지 버튼 */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -406,15 +406,15 @@ const MobileSignatureWall = forwardRef<
         )}
 
         {/* 현재 페이지 정보 */}
-        <div className="text-center py-2 text-gray-500 text-sm">
+        <div className="py-2 text-sm text-center text-gray-500">
           {currentPage + 1} / {totalPages} 페이지
         </div>
 
         {/* 로딩 오버레이 - 전체 화면 덮도록 수정 */}
         {isLoading && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-20">
-            <div className=" rounded-lg p-6 shadow-xl">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black mx-auto"></div>
+          <div className="fixed inset-0 z-20 flex items-center justify-center bg-black/50">
+            <div className="p-6 rounded-lg shadow-xl ">
+              <div className="w-12 h-12 mx-auto border-t-2 border-b-2 border-black rounded-full animate-spin"></div>
               <p className="mt-3 text-white">loading...</p>
             </div>
           </div>
@@ -434,7 +434,7 @@ const MobileSignatureWall = forwardRef<
       {/* 우측 상단 미션 버튼 */}
       <div
         onClick={() => setOpenMission?.(true)}
-        className="fixed top-3 md:top-5 right-2 md:right-10 z-10 cursor-pointer"
+        className="fixed z-10 cursor-pointer top-3 md:top-5 right-2 md:right-10"
       >
         <div className="text-white flex justify-end flex-col items-right gap-0 md:gap-1 text-[12px] md:text-[20px]">
           <div className="text-right font-robotoMono tracking-[1.5px]">
@@ -476,13 +476,15 @@ const SignatureItem = React.memo(
 
     return (
       <div
-        className="bg-black/40 backdrop-blur-sm rounded-lg p-1 sm:p-4 relative flex flex-col cursor-pointer hover:bg-black/60 transition"
+        className="relative flex flex-col p-1 transition rounded-lg cursor-pointer bg-black/40 backdrop-blur-sm sm:p-4 hover:bg-black/60"
         onClick={() => onClick(signature.id)}
       >
         <div className="flex items-start mb-3">
-          <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-white overflow-hidden mr-2 md:mr-3 flex-shrink-0 aspect-square" />
+          <div className="flex-shrink-0 w-8 h-8 mr-2 overflow-hidden bg-white rounded-full md:w-12 md:h-12 md:mr-3 aspect-square">
+            <img src={signature.profile_image} alt="" />
+          </div>
           <div>
-            <p className="text-sm md:text-base font-medium text-white">
+            <p className="text-sm font-medium text-white md:text-base">
               {signature.author_name || "Anonymous"}
             </p>
             <p className="text-xs text-gray-400">
@@ -499,13 +501,13 @@ const SignatureItem = React.memo(
         </div>
 
         {signature.signature_url && (
-          <div className="relative w-full aspect-square bg-transparent mb-2 overflow-hidden">
+          <div className="relative w-full mb-2 overflow-hidden bg-transparent aspect-square">
             <img
               src={signature.signature_url}
               alt="Fan signature"
               loading="lazy"
               decoding="async"
-              className="rounded w-full h-full object-contain"
+              className="object-contain w-full h-full rounded"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}
@@ -513,11 +515,11 @@ const SignatureItem = React.memo(
           </div>
         )}
 
-        <p className="text-sm md:text-base font-medium text-white message break-all">
+        <p className="text-sm font-medium text-white break-all md:text-base message">
           {signature.message}
         </p>
 
-        <div className="mt-2 flex items-center justify-between">
+        <div className="flex items-center justify-between mt-2">
           <button
             className={`flex items-center ${
               isLiked ? "text-red-500" : "text-gray-400"
@@ -526,7 +528,7 @@ const SignatureItem = React.memo(
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-1"
+              className="w-5 h-5 mr-1"
               fill={isLiked ? "currentColor" : "none"}
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -552,7 +554,7 @@ const SignatureItem = React.memo(
             />
             <button
               onClick={handleDownload}
-              className="bg-white hover:bg-gray-100 text-black font-bold p-1 rounded-full transition-colors duration-200 flex items-center justify-center"
+              className="flex items-center justify-center p-1 font-bold text-black transition-colors duration-200 bg-white rounded-full hover:bg-gray-100"
               title="이미지 다운로드"
             >
               <svg
