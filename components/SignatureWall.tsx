@@ -402,33 +402,33 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
     if (loading) {
       return (
         <div className="flex justify-center items-center min-h-[200px]">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+          <div className="w-12 h-12 border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
         </div>
       );
     }
 
     if (error) {
-      return <div className="text-center text-red-500 py-4">{error}</div>;
+      return <div className="py-4 text-center text-red-500">{error}</div>;
     }
 
     if (signatures.length === 0) {
-      return <div className="text-center py-4"></div>;
+      return <div className="py-4 text-center"></div>;
     }
 
     return (
       <>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-2 h-64">
+        <div className="grid h-64 grid-cols-2 gap-3 p-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-4">
           {signatures.map((sig, index) => (
             <div
               key={`sig.id-${index}`}
-              className="bg-black/40 backdrop-blur-sm rounded-lg p-1 sm:p-4 relative flex flex-col cursor-pointer hover:bg-black/60 transition"
+              className="relative flex flex-col p-1 transition rounded-lg cursor-pointer bg-black/40 backdrop-blur-sm sm:p-4 hover:bg-black/60"
               onClick={() => handleSignatureClick(sig.id)}
             >
               {/* Author Profile and Name */}
               <div className="flex items-start mb-3">
-                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-white overflow-hidden mr-2 md:mr-3 flex-shrink-0 aspect-square"></div>
+                <div className="flex-shrink-0 w-8 h-8 mr-2 overflow-hidden bg-white rounded-full md:w-12 md:h-12 md:mr-3 aspect-square"></div>
                 <div>
-                  <p className="text-sm md:text-base font-medium text-white">
+                  <p className="text-sm font-medium text-white md:text-base">
                     {sig.author_name || "Anonymous"}
                   </p>
                   {/* Timestamp */}
@@ -447,7 +447,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
 
               {/* Signature Image */}
               {sig.signature_url && (
-                <div className="relative w-full aspect-square bg-transparent mb-2 overflow-hidden">
+                <div className="relative w-full mb-2 overflow-hidden bg-transparent aspect-square">
                   <img
                     src={sig.signature_url}
                     alt="Fan signature"
@@ -470,12 +470,12 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
               )}
 
               {/* Message */}
-              <p className="text-sm md:text-base font-medium text-white message break-all">
+              <p className="text-sm font-medium text-white break-all md:text-base message">
                 {sig.message}
               </p>
 
               {/* 좋아요 버튼과 댓글 수 */}
-              <div className="mt-2 flex items-center justify-between">
+              <div className="flex items-center justify-between mt-2">
                 <button
                   className={`flex items-center ${
                     likedPosts[sig.id] ? "text-red-500" : "text-gray-400"
@@ -484,7 +484,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-1"
+                    className="w-5 h-5 mr-1"
                     fill={likedPosts[sig.id] ? "currentColor" : "none"}
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -528,7 +528,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
                   <button
                     onClick={() => handleDownload(index)}
                     //  onClick={() => setViewNum(index)}
-                    className="bg-white hover:bg-gray-100 text-black font-bold p-1 rounded-full transition-colors duration-200 flex items-center justify-center"
+                    className="flex items-center justify-center p-1 font-bold text-black transition-colors duration-200 bg-white rounded-full hover:bg-gray-100"
                     title="이미지 다운로드"
                   >
                     <svg
@@ -547,7 +547,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
                   <div className="flex items-center text-gray-400">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-1"
+                      className="w-5 h-5 mr-1"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -567,8 +567,8 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
           ))}
           {/* 로딩 스피너 및 로더 */}
           {isLoading && (
-            <div className="text-center py-4">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900 mx-auto"></div>
+            <div className="py-4 text-center">
+              <div className="w-12 h-12 mx-auto border-t-2 border-b-2 border-gray-900 rounded-full animate-spin"></div>
             </div>
           )}
           {hasMore && !isLoading && (
@@ -585,7 +585,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
             </div>
           )}
           {!hasMore && !isLoading && (
-            <div className="text-center py-4">No more signatures to load</div>
+            <div className="py-4 text-center"></div>
           )}
         </div>
 
@@ -604,7 +604,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
               setOpenMission(true);
             }
           }}
-          className="fixed top-3 md:top-5 right-2 md:right-10 z-10 cursor-pointer"
+          className="fixed z-10 cursor-pointer top-3 md:top-5 right-2 md:right-10"
         >
           <div
             className={`text-white flex justify-end flex-col items-right gap-0 md:gap-1 text-[12px] md:text-[20px]`}
