@@ -23,7 +23,7 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [device, setDevice] = useState("Other");
   const [videoUrl, setVideoUrl] = useState(
-    "https://www.youtube.com/watch?v=oDuxP2vnWNk"
+    "https://www.youtube.com/watch?v=0qKQDDnxois&list=PL5BPffU6B-SsywnJprN6fdSDfdKncZsuZ"
   );
   const [isMobile, setIsMobile] = useState(false);
   const [videoMuted, setVideoMuted] = useState(true);
@@ -214,11 +214,11 @@ export default function Home() {
         </div>
         <div className="pb-2 md:py-2 text-[20px] bg-black font-hannaPro relative flex justify-center items-center gap-4">
           <p className="text-center text-white">
-            Ye 팬들을 위한 디지털 신전, <br className="block md:hidden" />
-            서명하고, 소리치고, 남겨라.
+            침묵은 공범이다 – 눌러라, 남겨라, <br className="block md:hidden" />
+            바꿔라.
           </p>
           <p className="flex flex-col gap-0 text-center md:flex-row md:justify-center md:gap-1">
-            <span>{"<YE‘s서명>"}</span>
+            <span>{"<세돌정의서명>"}</span>
             <span className="">{postCount.toLocaleString()}</span>
           </p>
         </div>

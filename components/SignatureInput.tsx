@@ -1,23 +1,28 @@
-import { useState, useRef, useEffect } from 'react'
-import { submitSignature } from '@/lib/signature'
-import { uploadSignatureImage } from '@/lib/uploadToS3'
-import Image from 'next/image'
-import { getUserId, getUsername, setUsername, hasValidUsername } from '@/lib/user'
+import { useState, useRef, useEffect } from "react";
+import { submitSignature } from "@/lib/signature";
+import { uploadSignatureImage } from "@/lib/uploadToS3";
+import Image from "next/image";
+import {
+  getUserId,
+  getUsername,
+  setUsername,
+  hasValidUsername,
+} from "@/lib/user";
 
 interface SignatureInputProps {
-  onSignatureSubmit: () => void
+  onSignatureSubmit: () => void;
 }
 
 const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isDrawing, setIsDrawing] = useState(false)
-  const [message, setMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [currentColor, setCurrentColor] = useState('#ff0000')
-  const [brushSize, setBrushSize] = useState(3)
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null)
-  const [username, setUsernameState] = useState<string | null>(null)
-  const [isUsernameFetching, setIsUsernameFetching] = useState(false)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentColor, setCurrentColor] = useState("#ff0000");
+  const [brushSize, setBrushSize] = useState(3);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [username, setUsernameState] = useState<string | null>(null);
+  const [isUsernameFetching, setIsUsernameFetching] = useState(false);
 
   // 처음 로드될 때 쿠키에서 닉네임 가져오기
   useEffect(() => {
@@ -40,7 +45,7 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
       // 쿠키에 저장
       setUsername(newUsername);
     } catch (error) {
-      console.error('Error generating username:', error);
+      console.error("Error generating username:", error);
     } finally {
       setIsUsernameFetching(false);
     }
@@ -48,464 +53,478 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
 
   const getRandomName = async (): Promise<string> => {
     try {
-      const response = await fetch('/api/name-generator?ts=' + Date.now(), {
-        cache: 'no-store', // 클라이언트 캐싱 비활성화
+      const response = await fetch("/api/name-generator?ts=" + Date.now(), {
+        cache: "no-store", // 클라이언트 캐싱 비활성화
         headers: {
-          'Cache-Control': 'no-cache',
-          'X-Request-ID': Date.now().toString() + Math.random()
+          "Cache-Control": "no-cache",
+          "X-Request-ID": Date.now().toString() + Math.random(),
         },
       });
       if (!response.ok) {
-        throw new Error('Failed to fetch name');
+        throw new Error("Failed to fetch name");
       }
       const data = await response.json();
       return data.name;
     } catch (error) {
-      console.error('Error getting random name:', error);
-      return 'Ye Fan'; // Fallback name
+      console.error("Error getting random name:", error);
+      return "Ye Fan"; // Fallback name
     }
   };
 
   // 6가지 색상 옵션 (첫번째 빨간색 유지하고 나머지 변경)
   const colorOptions = [
-    { color: '#ff0000', name: 'Red' },
-    { color: '#FF69B4', name: 'Hot Pink' },
-    { color: '#8A2BE2', name: 'Purple' },
-    { color: '#FFA500', name: 'Orange' },
-    { color: '#20B2AA', name: 'Teal' },
-    { color: '#9370DB', name: 'Medium Purple' }
-  ]
+    { color: "#ff0000", name: "Red" },
+    { color: "#FF69B4", name: "Hot Pink" },
+    { color: "#8A2BE2", name: "Purple" },
+    { color: "#FFA500", name: "Orange" },
+    { color: "#20B2AA", name: "Teal" },
+    { color: "#9370DB", name: "Medium Purple" },
+  ];
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
     // Set canvas size to match its display size
-    const rect = canvas.getBoundingClientRect()
-    canvas.width = rect.width
-    canvas.height = rect.height
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
 
-    ctx.strokeStyle = currentColor
-    ctx.lineWidth = brushSize
-    ctx.lineCap = 'round'
-  }, [])
+    ctx.strokeStyle = currentColor;
+    ctx.lineWidth = brushSize;
+    ctx.lineCap = "round";
+  }, []);
 
   // Update stroke style when color changes
   useEffect(() => {
-    const ctx = canvasRef.current?.getContext('2d')
-    if (!ctx) return
-    
-    ctx.strokeStyle = currentColor
-    ctx.lineWidth = brushSize
-  }, [currentColor, brushSize])
+    const ctx = canvasRef.current?.getContext("2d");
+    if (!ctx) return;
+
+    ctx.strokeStyle = currentColor;
+    ctx.lineWidth = brushSize;
+  }, [currentColor, brushSize]);
 
   // Resize canvas when window is resized
   useEffect(() => {
     const handleResize = () => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-      
-      const rect = canvas.getBoundingClientRect()
-      const currentWidth = canvas.width
-      const currentHeight = canvas.height
-      
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const currentWidth = canvas.width;
+      const currentHeight = canvas.height;
+
       // Create a temporary canvas to store the current drawing
-      const tempCanvas = document.createElement('canvas')
-      tempCanvas.width = currentWidth
-      tempCanvas.height = currentHeight
-      const tempCtx = tempCanvas.getContext('2d')
+      const tempCanvas = document.createElement("canvas");
+      tempCanvas.width = currentWidth;
+      tempCanvas.height = currentHeight;
+      const tempCtx = tempCanvas.getContext("2d");
       if (tempCtx) {
-        tempCtx.drawImage(canvas, 0, 0)
+        tempCtx.drawImage(canvas, 0, 0);
       }
-      
+
       // Resize the canvas
-      canvas.width = rect.width
-      canvas.height = rect.height
-      
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
       // Restore the drawing
-      const ctx = canvas.getContext('2d')
+      const ctx = canvas.getContext("2d");
       if (ctx && tempCtx) {
-        ctx.drawImage(tempCanvas, 0, 0, currentWidth, currentHeight, 0, 0, canvas.width, canvas.height)
-        ctx.strokeStyle = currentColor
-        ctx.lineWidth = brushSize
-        ctx.lineCap = 'round'
+        ctx.drawImage(
+          tempCanvas,
+          0,
+          0,
+          currentWidth,
+          currentHeight,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = "round";
       }
-    }
-    
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [currentColor, brushSize])
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [currentColor, brushSize]);
 
   const getCanvasPoint = (clientX: number, clientY: number) => {
-    const canvas = canvasRef.current
-    if (!canvas) return null
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
 
-    const rect = canvas.getBoundingClientRect()
-    const scaleX = canvas.width / rect.width
-    const scaleY = canvas.height / rect.height
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
 
     return {
       x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY
-    }
-  }
+      y: (clientY - rect.top) * scaleY,
+    };
+  };
 
   // Mouse event handlers
   const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const point = getCanvasPoint(e.clientX, e.clientY)
-    if (!point) return
+    const point = getCanvasPoint(e.clientX, e.clientY);
+    if (!point) return;
 
-    const ctx = canvasRef.current?.getContext('2d')
-    if (!ctx) return
+    const ctx = canvasRef.current?.getContext("2d");
+    if (!ctx) return;
 
-    ctx.beginPath()
-    ctx.moveTo(point.x, point.y)
-    setIsDrawing(true)
-  }
+    ctx.beginPath();
+    ctx.moveTo(point.x, point.y);
+    setIsDrawing(true);
+  };
 
   const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!isDrawing) return
+    if (!isDrawing) return;
 
-    const point = getCanvasPoint(e.clientX, e.clientY)
-    if (!point) return
+    const point = getCanvasPoint(e.clientX, e.clientY);
+    if (!point) return;
 
-    const ctx = canvasRef.current?.getContext('2d')
-    if (!ctx) return
+    const ctx = canvasRef.current?.getContext("2d");
+    if (!ctx) return;
 
-    ctx.lineTo(point.x, point.y)
-    ctx.stroke()
-  }
+    ctx.lineTo(point.x, point.y);
+    ctx.stroke();
+  };
 
   const stopDrawing = () => {
     if (isDrawing) {
-      const ctx = canvasRef.current?.getContext('2d')
+      const ctx = canvasRef.current?.getContext("2d");
       if (ctx) {
-        ctx.closePath()
+        ctx.closePath();
       }
-      setIsDrawing(false)
+      setIsDrawing(false);
     }
-  }
+  };
 
   // Touch event handlers for mobile
   const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
-    e.preventDefault() // Prevent scrolling when drawing
-    if (e.touches.length === 0) return
-    
-    const touch = e.touches[0]
-    const point = getCanvasPoint(touch.clientX, touch.clientY)
-    if (!point) return
+    e.preventDefault(); // Prevent scrolling when drawing
+    if (e.touches.length === 0) return;
 
-    const ctx = canvasRef.current?.getContext('2d')
-    if (!ctx) return
+    const touch = e.touches[0];
+    const point = getCanvasPoint(touch.clientX, touch.clientY);
+    if (!point) return;
 
-    ctx.beginPath()
-    ctx.moveTo(point.x, point.y)
-    setIsDrawing(true)
-  }
+    const ctx = canvasRef.current?.getContext("2d");
+    if (!ctx) return;
+
+    ctx.beginPath();
+    ctx.moveTo(point.x, point.y);
+    setIsDrawing(true);
+  };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
-    e.preventDefault() // Prevent scrolling when drawing
-    if (!isDrawing || e.touches.length === 0) return
-    
-    const touch = e.touches[0]
-    const point = getCanvasPoint(touch.clientX, touch.clientY)
-    if (!point) return
+    e.preventDefault(); // Prevent scrolling when drawing
+    if (!isDrawing || e.touches.length === 0) return;
 
-    const ctx = canvasRef.current?.getContext('2d')
-    if (!ctx) return
+    const touch = e.touches[0];
+    const point = getCanvasPoint(touch.clientX, touch.clientY);
+    if (!point) return;
 
-    ctx.lineTo(point.x, point.y)
-    ctx.stroke()
-  }
+    const ctx = canvasRef.current?.getContext("2d");
+    if (!ctx) return;
+
+    ctx.lineTo(point.x, point.y);
+    ctx.stroke();
+  };
 
   const handleTouchEnd = (e: React.TouchEvent<HTMLCanvasElement>) => {
-    e.preventDefault()
-    stopDrawing()
-  }
+    e.preventDefault();
+    stopDrawing();
+  };
 
   const clearCanvas = () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-  }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
+    const file = e.target.files?.[0];
     if (!file) {
-      console.log('No file selected')
-      return
+      console.log("No file selected");
+      return;
     }
-    
-    console.log('File selected:', file.name, file.type, file.size)
-    
+
+    console.log("File selected:", file.name, file.type, file.size);
+
     // Check if file is an image
-    if (!file.type.startsWith('image/')) {
-      console.error('Selected file is not an image')
-      alert('Please select an image file')
-      return
+    if (!file.type.startsWith("image/")) {
+      console.error("Selected file is not an image");
+      alert("Please select an image file");
+      return;
     }
-    
-    const reader = new FileReader()
-    
+
+    const reader = new FileReader();
+
     reader.onload = (event) => {
-      console.log('File loaded successfully', event.target?.result ? 'with data' : 'without data')
+      console.log(
+        "File loaded successfully",
+        event.target?.result ? "with data" : "without data"
+      );
       if (event.target?.result) {
         // 직접 setUploadedImage 호출
-        setUploadedImage(event.target.result as string)
+        setUploadedImage(event.target.result as string);
       } else {
-        console.error('No data in loaded file')
+        console.error("No data in loaded file");
       }
-    }
-    
+    };
+
     reader.onerror = (error) => {
-      console.error('Error reading file:', error)
-      alert('Error reading the selected file')
-    }
-    
-    reader.readAsDataURL(file)
-    
+      console.error("Error reading file:", error);
+      alert("Error reading the selected file");
+    };
+
+    reader.readAsDataURL(file);
+
     // Reset the input to allow selecting the same file again
-    e.target.value = ''
-  }
+    e.target.value = "";
+  };
 
   const canvasToBlob = async (canvas: HTMLCanvasElement): Promise<Blob> => {
     return new Promise((resolve, reject) => {
       try {
         canvas.toBlob((blob) => {
           if (!blob) {
-            reject(new Error('Failed to convert canvas to blob'))
-            return
+            reject(new Error("Failed to convert canvas to blob"));
+            return;
           }
-          resolve(blob)
-        }, 'image/png')
+          resolve(blob);
+        }, "image/png");
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
-  }
+    });
+  };
 
   // 이미지와 캔버스를 합성하는 함수
   const combineImageAndCanvas = async (): Promise<Blob> => {
-    const canvas = canvasRef.current
+    const canvas = canvasRef.current;
     if (!canvas) {
-      throw new Error('Canvas not found')
+      throw new Error("Canvas not found");
     }
 
     // 정사각형 캔버스 생성 (1:1 비율)
-    const combinedCanvas = document.createElement('canvas')
-    
+    const combinedCanvas = document.createElement("canvas");
+
     // 정사각형 캔버스 크기 설정
-    const squareSize = Math.max(canvas.width, canvas.height)
-    combinedCanvas.width = squareSize
-    combinedCanvas.height = squareSize
-    
-    const ctx = combinedCanvas.getContext('2d')
+    const squareSize = Math.max(canvas.width, canvas.height);
+    combinedCanvas.width = squareSize;
+    combinedCanvas.height = squareSize;
+
+    const ctx = combinedCanvas.getContext("2d");
     if (!ctx) {
-      throw new Error('Failed to get canvas context')
+      throw new Error("Failed to get canvas context");
     }
-    
+
     // 배경을 투명하게 설정
-    ctx.clearRect(0, 0, combinedCanvas.width, combinedCanvas.height)
-    
+    ctx.clearRect(0, 0, combinedCanvas.width, combinedCanvas.height);
+
     // 업로드된 이미지가 있으면 그리기
     if (uploadedImage) {
       return new Promise((resolve) => {
-        const img = document.createElement('img') as HTMLImageElement
+        const img = document.createElement("img") as HTMLImageElement;
         img.onload = async () => {
           // 이미지 비율 계산
-          const imgRatio = img.width / img.height
-          
+          const imgRatio = img.width / img.height;
+
           // 이미지를 정사각형 안에 맞추기 (비율 유지)
-          let drawWidth, drawHeight, offsetX, offsetY
-          
+          let drawWidth, drawHeight, offsetX, offsetY;
+
           // 이미지 크기를 정사각형 안에 맞추기 (90% 영역 사용)
-          if (imgRatio < 1) {  // 세로가 긴 이미지
-            drawHeight = combinedCanvas.height * 0.9
-            drawWidth = drawHeight * imgRatio
-          } else {  // 가로가 긴 이미지
-            drawWidth = combinedCanvas.width * 0.9
-            drawHeight = drawWidth / imgRatio
+          if (imgRatio < 1) {
+            // 세로가 긴 이미지
+            drawHeight = combinedCanvas.height * 0.9;
+            drawWidth = drawHeight * imgRatio;
+          } else {
+            // 가로가 긴 이미지
+            drawWidth = combinedCanvas.width * 0.9;
+            drawHeight = drawWidth / imgRatio;
           }
-          
+
           // 이미지를 중앙에 배치
-          offsetX = (combinedCanvas.width - drawWidth) / 2
-          offsetY = (combinedCanvas.height - drawHeight) / 2
-          
+          offsetX = (combinedCanvas.width - drawWidth) / 2;
+          offsetY = (combinedCanvas.height - drawHeight) / 2;
+
           // 이미지 그리기 (비율 유지)
-          ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
-          
+          ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
           // 캔버스 그리기 - 항상 중앙에 배치
-          const scaleFactor = 1.0  // 그림 크기를 그대로 유지
-          const scaledWidth = canvas.width * scaleFactor
-          const scaledHeight = canvas.height * scaleFactor
-          
+          const scaleFactor = 1.0; // 그림 크기를 그대로 유지
+          const scaledWidth = canvas.width * scaleFactor;
+          const scaledHeight = canvas.height * scaleFactor;
+
           // 그림을 항상 중앙에 배치
-          const canvasOffsetX = (combinedCanvas.width - scaledWidth) / 2
-          const canvasOffsetY = (combinedCanvas.height - scaledHeight) / 2
-          
+          const canvasOffsetX = (combinedCanvas.width - scaledWidth) / 2;
+          const canvasOffsetY = (combinedCanvas.height - scaledHeight) / 2;
+
           // 캔버스 내용 그리기
           ctx.drawImage(
-            canvas, 
-            canvasOffsetX, 
-            canvasOffsetY, 
-            scaledWidth, 
+            canvas,
+            canvasOffsetX,
+            canvasOffsetY,
+            scaledWidth,
             scaledHeight
-          )
-          
+          );
+
           // blob으로 변환하여 반환 (PNG로 저장하여 투명 배경 유지)
           combinedCanvas.toBlob((blob) => {
             if (!blob) {
-              throw new Error('Failed to convert combined canvas to blob')
+              throw new Error("Failed to convert combined canvas to blob");
             }
-            resolve(blob)
-          }, 'image/png')
-        }
-        
+            resolve(blob);
+          }, "image/png");
+        };
+
         img.onerror = () => {
           // 이미지 로드 실패 시 그냥 캔버스만 반환
-          const canvasCenterX = (combinedCanvas.width - canvas.width) / 2
-          const canvasCenterY = (combinedCanvas.height - canvas.height) / 2
-          ctx.drawImage(canvas, canvasCenterX, canvasCenterY)
+          const canvasCenterX = (combinedCanvas.width - canvas.width) / 2;
+          const canvasCenterY = (combinedCanvas.height - canvas.height) / 2;
+          ctx.drawImage(canvas, canvasCenterX, canvasCenterY);
           combinedCanvas.toBlob((blob) => {
             if (!blob) {
-              throw new Error('Failed to convert canvas to blob')
+              throw new Error("Failed to convert canvas to blob");
             }
-            resolve(blob)
-          }, 'image/png')
-        }
-        
-        img.src = uploadedImage
-      })
+            resolve(blob);
+          }, "image/png");
+        };
+
+        img.src = uploadedImage;
+      });
     } else {
       // 이미지가 없으면 캔버스 내용을 정사각형 캔버스 중앙에 그리기
-      const scaleFactor = 1.0  // 그림 크기 유지
-      const scaledWidth = canvas.width * scaleFactor
-      const scaledHeight = canvas.height * scaleFactor
-      
+      const scaleFactor = 1.0; // 그림 크기 유지
+      const scaledWidth = canvas.width * scaleFactor;
+      const scaledHeight = canvas.height * scaleFactor;
+
       // 그림을 중앙에 배치
-      const canvasOffsetX = (combinedCanvas.width - scaledWidth) / 2
-      const canvasOffsetY = (combinedCanvas.height - scaledHeight) / 2
-      
+      const canvasOffsetX = (combinedCanvas.width - scaledWidth) / 2;
+      const canvasOffsetY = (combinedCanvas.height - scaledHeight) / 2;
+
       // 캔버스 그리기
       ctx.drawImage(
-        canvas, 
-        canvasOffsetX, 
-        canvasOffsetY, 
-        scaledWidth, 
+        canvas,
+        canvasOffsetX,
+        canvasOffsetY,
+        scaledWidth,
         scaledHeight
-      )
-      
-      return canvasToBlob(combinedCanvas)
+      );
+
+      return canvasToBlob(combinedCanvas);
     }
-  }
+  };
 
   // Function to get a random profile image from our set
   const getRandomProfileImage = (): string => {
-    const profileCount = 10;  // k1부터 k10까지 10개의 프로필 이미지
+    const profileCount = 6; // k1부터 k10까지 10개의 프로필 이미지
     const randomIndex = Math.floor(Math.random() * profileCount) + 1;
-    return `/profiles/k${randomIndex}.gif`;
+    return `/profiles/gg_${randomIndex}.png`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (message.trim() === '') {
-      alert('메시지를 입력해주세요.')
-      return
+    e.preventDefault();
+
+    if (message.trim() === "") {
+      alert("메시지를 입력해주세요.");
+      return;
     }
 
     // 닉네임이 없으면 제출 불가
     if (!username) {
-      alert('닉네임을 생성 중입니다. 잠시 후 다시 시도해주세요.');
+      alert("닉네임을 생성 중입니다. 잠시 후 다시 시도해주세요.");
       generateUsername();
       return;
     }
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     try {
-      const canvas = canvasRef.current
+      const canvas = canvasRef.current;
       if (!canvas) {
-        throw new Error('Canvas is not available')
+        throw new Error("Canvas is not available");
       }
 
-      let signatureImageBlob: Blob
+      let signatureImageBlob: Blob;
 
       if (uploadedImage) {
-        signatureImageBlob = await combineImageAndCanvas()
+        signatureImageBlob = await combineImageAndCanvas();
       } else {
-        signatureImageBlob = await canvasToBlob(canvas)
+        signatureImageBlob = await canvasToBlob(canvas);
       }
 
       // Upload signature image to S3
-      const imageUrl = await uploadSignatureImage(signatureImageBlob)
-      
+      const imageUrl = await uploadSignatureImage(signatureImageBlob);
+
       if (!imageUrl) {
-        throw new Error('Failed to upload signature image')
+        throw new Error("Failed to upload signature image");
       }
 
       // 저장된 닉네임과 랜덤 프로필 이미지 사용
       const profileImage = getRandomProfileImage();
 
-
-      console.log('username:', username)
+      console.log("username:", username);
       // Submit signature to Supabase
       const result = await submitSignature({
         message: message,
         signature_url: imageUrl,
         author_name: username,
-        profile_image: profileImage
-      })
+        profile_image: profileImage,
+      });
 
       if (result.error) {
-        throw result.error
+        throw result.error;
       }
 
       // Clear form
-      setMessage('')
-      clearCanvas()
-      setUploadedImage(null)
-      
+      setMessage("");
+      clearCanvas();
+      setUploadedImage(null);
+
       // Call parent callback
-      onSignatureSubmit()
-      
-      alert('서명이 성공적으로 등록되었습니다!')
+      onSignatureSubmit();
+
+      alert("서명이 성공적으로 등록되었습니다!");
     } catch (error) {
-      console.error('Error submitting signature:', error)
-      alert('서명 제출 중 오류가 발생했습니다. 다시 시도해주세요.')
+      console.error("Error submitting signature:", error);
+      alert("서명 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
       <div className="relative w-full max-h-[250px] md:max-h-[400px] aspect-square mb-4 bg-transparent border border-kanye-accent rounded-lg overflow-hidden">
         {uploadedImage && (
           <>
-            <div className="absolute inset-0 pointer-events-none z-0">
+            <div className="absolute inset-0 z-0 pointer-events-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src={uploadedImage} 
-                alt="Background" 
-                className="w-full h-full object-contain"
+              <img
+                src={uploadedImage}
+                alt="Background"
+                className="object-contain w-full h-full"
                 onError={(e) => {
-                  console.error('Error loading image');
-                  (e.target as HTMLImageElement).style.display = 'none';
+                  console.error("Error loading image");
+                  (e.target as HTMLImageElement).style.display = "none";
                 }}
               />
             </div>
             <button
               type="button"
               onClick={() => setUploadedImage(null)}
-              className="absolute top-2 right-2 z-20 bg-red-600 hover:bg-red-700 text-white p-1 rounded-full w-8 h-8 flex items-center justify-center"
+              className="absolute z-20 flex items-center justify-center w-8 h-8 p-1 text-white bg-red-600 rounded-full top-2 right-2 hover:bg-red-700"
               aria-label="Remove image"
             >
               ✕
@@ -522,15 +541,18 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={handleTouchEnd}
-          className="absolute top-0 left-0 w-full h-full cursor-crosshair z-10"
-          style={{ touchAction: 'none' }}
+          className="absolute top-0 left-0 z-10 w-full h-full cursor-crosshair"
+          style={{ touchAction: "none" }}
         />
       </div>
       {/* 색상 선택 도구 */}
-      <div className="w-full flex flex-wrap md:flex-nowrap justify-between items-center mb-4 ">
-        <div className="flex justify-start gap-1 items-center mr-4">
-          <label htmlFor="brushSize" className="text-white text-sm flex justify-start gap-1 items-center">
-              <input
+      <div className="flex flex-wrap items-center justify-between w-full mb-4 md:flex-nowrap ">
+        <div className="flex items-center justify-start gap-1 mr-4">
+          <label
+            htmlFor="brushSize"
+            className="flex items-center justify-start gap-1 text-sm text-white"
+          >
+            <input
               id="brushSize"
               type="range"
               min="1"
@@ -538,7 +560,7 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
               value={brushSize}
               onChange={(e) => setBrushSize(parseInt(e.target.value))}
               className="w-24"
-              style={{ accentColor: '#FFA500' }}
+              style={{ accentColor: "#FFA500" }}
             />
             <span>{brushSize}px</span>
           </label>
@@ -549,15 +571,30 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
               key={option.color}
               type="button"
               onClick={() => setCurrentColor(option.color)}
-              className={`w-6 h-6 md:w-8 md:h-8 rounded-full border-2 ${currentColor === option.color ? 'border-white' : 'border-transparent'}`}
+              className={`w-6 h-6 md:w-8 md:h-8 rounded-full border-2 ${
+                currentColor === option.color
+                  ? "border-white"
+                  : "border-transparent"
+              }`}
               style={{ backgroundColor: option.color }}
               aria-label={`Select ${option.name} color`}
             />
           ))}
         </div>
-        <label className="mt-3 md:mt-0 w-full md:w-auto bg-kanye-accent hover:bg-opacity-80 text-white px-4 py-2 rounded cursor-pointer transition-colors flex justify-center items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <label className="flex items-center justify-center w-full px-4 py-2 mt-3 text-white transition-colors rounded cursor-pointer md:mt-0 md:w-auto bg-kanye-accent hover:bg-opacity-80">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5 mr-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
           </svg>
           ADD IMAGE
           <input
@@ -573,14 +610,14 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
         onChange={(e) => setMessage(e.target.value)}
         // placeholder="Share your message..."
         placeholder="SHARE YOUR MESSAGE..."
-        className="w-full p-4 bg-transparent text-white border border-kanye-accent rounded-lg focus:ring-2 focus:ring-kanye-accent focus:outline-none resize-none mb-4"
+        className="w-full p-4 mb-4 text-white bg-transparent border rounded-lg resize-none border-kanye-accent focus:ring-2 focus:ring-kanye-accent focus:outline-none"
         rows={2} // 높이 줄임
       />
       <div className="flex gap-4">
         <button
           type="button"
           onClick={clearCanvas}
-          className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          className="px-6 py-3 text-white transition-colors bg-gray-800 rounded-lg hover:bg-gray-700"
         >
           {/* Clear Signature */}
           CLEAR SIGNATURE
@@ -588,13 +625,13 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
         <button
           type="submit"
           disabled={isSubmitting || !message}
-          className="flex-1 bg-kanye-accent text-white py-3 px-6 rounded-lg font-bold hover:bg-opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 px-6 py-3 font-bold text-white transition-opacity rounded-lg bg-kanye-accent hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? 'Signing...' : '￥$'}
+          {isSubmitting ? "Signing..." : "￥$"}
         </button>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default SignatureInput 
+export default SignatureInput;
