@@ -1,0 +1,37 @@
+{
+  "name": "kaynesign",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3005",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.812.0",
+    "@aws-sdk/lib-storage": "^3.511.0",
+    "@heroicons/react": "^2.2.0",
+    "@supabase/supabase-js": "^2.49.5",
+    "hls.js": "^1.6.2",
+    "html2canvas": "^1.4.1",
+    "lodash": "^4.17.21",
+    "next": "14.0.4",
+    "openai": "^4.100.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-youtube": "^10.1.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.17",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.8",
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}

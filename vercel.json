@@ -1,0 +1,14 @@
+{
+    "routes": [
+        {
+            "src": "/api/name-generator",
+            "methods": ["GET"],  
+            "headers": {
+              "Cache-Control": "no-store, max-age=0",
+              "Pragma": "no-cache",
+              "Expires": "0",
+              "Vary": "X-Request-ID"
+            }
+        }
+    ]
+  }

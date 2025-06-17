@@ -1,0 +1,80 @@
+import { NextResponse } from 'next/server';
+import OpenAI from 'openai';
+export const dynamic = "force-dynamic"; // ⬅️ 핵심!
+
+// List of predefined Kanye-related names (fallback)
+const kanyeNames = [
+  'YeGenius', 'Pablo', 'Yeezus', '808s', 'YeDonda', 
+  'KanyeFan', 'YeVision', 'YeezyBoost', '칸예팬', '예스터',
+  'GradMan', 'CollegeYe', 'LifePablo', 'YeWest', '웨스트팬',
+  'YeCreator', 'DondaSon', '예술가', '칸예사랑', 'YeLover'
+];
+
+// Initialize OpenAI client if API key is available
+const openai = process.env.OPENAI_API_KEY 
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
+
+export async function GET() {
+  try {
+    // If OpenAI client is available, use it to generate a name
+    if (openai) {
+      const uniqueSeed = Date.now() + Math.random(); // 고유 시드 추가
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-4o",
+          messages: [
+            {
+              role: "system",
+              content:
+                "당신은 칸예 웨스트 관련 독특한 사용자 이름을 생성하는 전문가입니다. 영어나 한글로 15자 이내의 이름만 응답하세요. 이름 외에는 아무것도 응답하지 마세요.",
+            },
+            {
+              role: "user",
+              content: `칸예 웨스트와 관련된 독특하고 창의적인 이름을 하나만 생성해주세요.`,
+            },
+          ],
+          temperature: 0.9,
+          max_tokens: 10,
+        });
+
+        const name = response.choices[0]?.message?.content?.trim();
+        console.log("nameopenai:", name);
+
+        if (name) {
+          return NextResponse.json(
+            { name, type: "gpt" },
+            {
+              headers: {
+                "Cache-Control": "no-store, max-age=0",
+              },
+            }
+          );
+        }
+      } catch (error) {
+        console.error("OpenAI API 오류:", error);
+        // OpenAI API 호출 실패 시 fallback으로 진행
+      }
+    }
+    
+    // Fallback: 미리 정의된 배열에서 랜덤하게 선택
+    const randomIndex = Math.floor(Math.random() * kanyeNames.length);
+    const name = kanyeNames[randomIndex];
+    console.log("name:", name);
+
+    return NextResponse.json(
+      { name, type: "random" },
+      {
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    );
+  } catch (error) {
+    console.error('이름 생성 중 오류 발생:', error);
+    return NextResponse.json(
+      { error: '이름 생성에 실패했습니다' },
+      { status: 500 }
+    );
+  }
+} 
