@@ -450,7 +450,7 @@ const SignatureModal = ({
                 signatureUrl={signature.signature_url}
                 message={signature.message}
                 authorName={signature.author_name || "Anonymous"}
-                hashtags={["#고칸붕캠페인", "#ComebackYe"]}
+             hashtags={["#진실을말해이세돌", "#침묵은공범이다"]}
               />
               <button
                 onClick={() => handleDownload()}

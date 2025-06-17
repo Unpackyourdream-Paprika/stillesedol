@@ -78,7 +78,7 @@ const MobileSignatureWall = forwardRef<
       case count > 5000:
         return "Noise Made";
       default:
-        return "The Jumpout";
+        return "E-X";
     }
   };
 
@@ -438,8 +438,8 @@ const MobileSignatureWall = forwardRef<
       >
         <div className="text-white flex justify-end flex-col items-right gap-0 md:gap-1 text-[12px] md:text-[20px]">
           <div className="text-right font-robotoMono tracking-[1.5px]">
-            <p>Ye's Pledge🌕</p>
-            <p>{postLevel}🌑</p>
+            <p>Ni.Fan 🟡</p>
+            <p>{postLevel} 🌑</p>
           </div>
         </div>
       </div>
@@ -550,7 +550,7 @@ const SignatureItem = React.memo(
               signatureUrl={signature.signature_url}
               message={signature.message}
               authorName={signature.author_name || "Anonymous"}
-              hashtags={["#고칸붕캠페인", "#ComebackYe"]}
+              hashtags={["#진실을말해이세돌", "#침묵은공범이다"]}
             />
             <button
               onClick={handleDownload}
