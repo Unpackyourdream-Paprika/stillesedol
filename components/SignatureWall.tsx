@@ -426,7 +426,9 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
             >
               {/* Author Profile and Name */}
               <div className="flex items-start mb-3">
-                <div className="flex-shrink-0 w-8 h-8 mr-2 overflow-hidden bg-white rounded-full md:w-12 md:h-12 md:mr-3 aspect-square"></div>
+                <div className="flex-shrink-0 w-8 h-8 mr-2 overflow-hidden bg-white rounded-full md:w-12 md:h-12 md:mr-3 aspect-square">
+                  <img src={sig.profile_image} alt="" />
+                </div>
                 <div>
                   <p className="text-sm font-medium text-white md:text-base">
                     {sig.author_name || "Anonymous"}
@@ -584,9 +586,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
               <span>Loading more...</span> {/* 디버깅용 텍스트 */}
             </div>
           )}
-          {!hasMore && !isLoading && (
-            <div className="py-4 text-center"></div>
-          )}
+          {!hasMore && !isLoading && <div className="py-4 text-center"></div>}
         </div>
 
         {/* 게시글 상세보기 모달 */}

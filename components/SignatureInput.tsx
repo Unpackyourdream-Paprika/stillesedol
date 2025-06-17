@@ -474,7 +474,7 @@ const SignatureInput = ({ onSignatureSubmit }: SignatureInputProps) => {
       // 저장된 닉네임과 랜덤 프로필 이미지 사용
       const profileImage = getRandomProfileImage();
 
-      console.log("username:", username);
+      // console.log("username:", username);
       // Submit signature to Supabase
       const result = await submitSignature({
         message: message,
