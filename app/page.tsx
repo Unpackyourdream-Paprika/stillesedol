@@ -127,21 +127,21 @@ export default function Home() {
         >
           <div className="relative flex items-center justify-center w-full gap-2 md:gap-4">
             {/* Left GIF */}
-            {/* <Link
-              href="https://smartstore.naver.com/donquiniku/products/11852523127"
+            <Link
+              href="https://smartstore.naver.com/donquiniku/products/11811352642?nl-query=%EB%8F%88%ED%82%A4%EB%8B%88%EC%BF%A0&nl-ts-pid=jaabhwqpts0ssa4fh%2B4sssssshh-123807&NaPm=ct%3Dmc0e8ff4%7Cci%3D1588bc724c59b137016654459c504e45d8cdeb79%7Ctr%3Dsls%7Csn%3D12250017%7Chk%3D1db6ddc1ca32c72ec609b1c42760841b9db0fc37"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-shrink-0 hidden md:block"
               style={{ width: "30%", maxWidth: "350px" }}
             >
               <Image
-                src="/100_Kayne_m.gif"
+                src="/jyuAUO4.gif"
                 alt="Bully Link"
                 width={350}
                 height={250}
                 className="w-full h-auto rounded-lg"
               />
-            </Link> */}
+            </Link>
 
             {/* Logo */}
             <div
@@ -161,21 +161,21 @@ export default function Home() {
             </div>
 
             {/* Right GIF */}
-            {/* <Link
-              href="https://smartstore.naver.com/donquiniku/products/11854994885"
+            <Link
+              href="https://smartstore.naver.com/donquiniku/products/11811352642?nl-query=%EB%8F%88%ED%82%A4%EB%8B%88%EC%BF%A0&nl-ts-pid=jaabhwqpts0ssa4fh%2B4sssssshh-123807&NaPm=ct%3Dmc0e8ff4%7Cci%3D1588bc724c59b137016654459c504e45d8cdeb79%7Ctr%3Dsls%7Csn%3D12250017%7Chk%3D1db6ddc1ca32c72ec609b1c42760841b9db0fc37"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-shrink-0 hidden md:block"
               style={{ width: "30%", maxWidth: "350px" }}
             >
               <Image
-                src="/100_Kayne_m.gif"
+                src="/jyuAUO4.gif"
                 alt="Bully Link"
                 width={350}
                 height={250}
                 className="w-full h-auto rounded-lg"
               />
-            </Link> */}
+            </Link>
           </div>
         </div>
         <div className="flex items-center justify-center w-full gap-2 p-4 bg-black md:hidden">
@@ -188,7 +188,7 @@ export default function Home() {
             style={{ width: "50%", maxWidth: "350px" }}
           >
             <Image
-              src="/100_Kayne_m.gif"
+              src="/jyuAUO4.gif"
               alt="Bully Link"
               width={350}
               height={250}
@@ -204,7 +204,7 @@ export default function Home() {
             style={{ width: "50%", maxWidth: "350px" }}
           >
             <Image
-              src="/100_Kayne_m.gif"
+              src="/jyuAUO4.gif"
               alt="Bully Link"
               width={350}
               height={250}
@@ -213,12 +213,12 @@ export default function Home() {
           </Link>
         </div>
         <div className="pb-2 md:py-2 text-[20px] bg-black font-hannaPro relative flex justify-center items-center gap-4">
-          <p className="text-center text-white">
-            침묵은 공범이다 – 눌러라, 남겨라, <br className="block md:hidden" />
+          <p className="text-center text-white ">
+            침묵은 공범이다 - <br className="block md:hidden" /> 눌러라, 남겨라,
             바꿔라.
           </p>
           <p className="flex flex-col gap-0 text-center md:flex-row md:justify-center md:gap-1">
-            <span>{"<세돌정의서명>"}</span>
+            <span className="">{"<세돌정의서명>"}</span>
             <span className="">{postCount.toLocaleString()}</span>
           </p>
         </div>
