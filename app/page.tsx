@@ -142,16 +142,6 @@ export default function Home() {
                 className="w-full h-auto rounded-lg"
               />
             </Link>
-            {/* <div className="flex-shrink-0 hidden md:block" 
-            style={{ width: '30%', maxWidth: '350px' }}>
-              <Image
-                src="/100_Kayne_m.gif"
-                alt="Bully Link"
-                width={350}
-                height={250}
-                className="w-full h-auto rounded-lg"
-              />
-            </div> */}
 
             {/* Logo */}
             <div
@@ -161,10 +151,10 @@ export default function Home() {
               style={{ width: "30%", maxWidth: "300px" }}
             >
               <Image
-                src="/Bully.svg"
-                alt="Kanye Fan Logo"
+                src="/header/header.png"
+                alt="Logo"
                 width={300}
-                height={109}
+                height={200}
                 priority
                 className="w-full h-auto"
               />
@@ -186,19 +176,9 @@ export default function Home() {
                 className="w-full h-auto rounded-lg"
               />
             </Link>
-            {/* <div className="flex-shrink-0 hidden md:block" 
-            style={{ width: '30%', maxWidth: '350px' }}>
-              <Image
-                src="/100_Kayne_m.gif"
-                alt="Bully Link"
-                width={350}
-                height={250}
-                className="w-full h-auto rounded-lg"
-              />
-            </div> */}
           </div>
         </div>
-        <div className="flex items-center justify-center block w-full gap-2 p-4 bg-black md:hidden">
+        <div className="flex items-center justify-center w-full gap-2 p-4 bg-black md:hidden">
           {/* Left GIF */}
           <Link
             href="https://smartstore.naver.com/donquiniku/products/11852523127"
@@ -215,17 +195,7 @@ export default function Home() {
               className="w-full h-auto rounded-lg"
             />
           </Link>
-          {/* <div className="flex-shrink-0 block md:hidden" 
-            style={{ width: '50%', maxWidth: '350px' }}>
-              <Image
-                src="/100_Kayne_m.gif"
-                alt="Bully Link"
-                width={350}
-                height={250}
-                className="w-full h-auto rounded-lg"
-              />
-            </div> */}
-          {/* Right GIF */}
+
           <Link
             href="https://smartstore.naver.com/donquiniku/products/11854994885"
             target="_blank"
@@ -241,16 +211,6 @@ export default function Home() {
               className="w-full h-auto rounded-lg"
             />
           </Link>
-          {/* <div className="flex-shrink-0 block md:hidden" 
-            style={{ width: '50%', maxWidth: '350px' }}>
-              <Image
-                src="/100_Kayne_m.gif"
-                alt="Bully Link"
-                width={350}
-                height={250}
-                className="w-full h-auto rounded-lg"
-              />
-            </div> */}
         </div>
         <div className="pb-2 md:py-2 text-[20px] bg-black font-hannaPro relative flex justify-center items-center gap-4">
           <p className="text-center text-white">
@@ -301,7 +261,7 @@ export default function Home() {
       {/* 본문 콘텐츠 - 고정 요소 아래에 배치 */}
       <div
         className={`w-full max-w-6xl px-4 mt-4 transition-all duration-300 ${
-          isScrolled ? "pt-[300px]" : "pt-[450px] md:pt-[600px]"
+          isScrolled ? "pt-[300px]" : "pt-[600px] md:pt-[600px]"
         }`}
       >
         {isMobile ? (
