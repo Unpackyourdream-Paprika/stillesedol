@@ -16,6 +16,10 @@ const s3 = new S3Client({
   forcePathStyle: true,
 });
 
+
+
+
+
 export async function POST(request: Request) {
   console.log("Starting file upload process...");
 
