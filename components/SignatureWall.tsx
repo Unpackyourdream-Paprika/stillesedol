@@ -132,7 +132,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
         case count > 100000:
           return "Bulltmode";
         default:
-          return "The Jumpout";
+          return "E⎯X";
       }
     };
 
@@ -515,7 +515,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
                     signatureUrl={sig.signature_url}
                     message={sig.message}
                     authorName={sig.author_name || "Anonymous"}
-                    hashtags={["#고칸붕캠페인", "#ComebackYe"]}
+                    hashtags={["#진실을말해이세돌", "#침묵은공범이다"]}
                   />
                   {/* {viewNum === index && (
                   <TestModal
@@ -523,7 +523,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
                     signatureUrl={sig.signature_url}
                     message={sig.message}
                     authorName={sig.author_name || 'Anonymous'}
-                    hashtags={['#고칸붕캠페인', '#ComebackYe']}
+                        hashtags={["#진실을말해이세돌", "#침묵은공범이다"]}
                   />
                 )} */}
 
@@ -610,7 +610,7 @@ const SignatureWall = forwardRef<SignatureWallRef, SignatureWallProps>(
             className={`text-white flex justify-end flex-col items-right gap-0 md:gap-1 text-[12px] md:text-[20px]`}
           >
             <div className="text-right font-robotoMono tracking-[1.5px]">
-              <p>Ye's Pledge🌕</p>
+              <p>Ni.Fan 🟡</p>
               <p>{postLevel}🌑</p>
             </div>
           </div>
