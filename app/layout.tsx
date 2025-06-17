@@ -1,47 +1,54 @@
-import './globals.css'
-import { Inter } from 'next/font/google';
-import Script from 'next/script';
+import "./globals.css";
+import { Inter } from "next/font/google";
+import Script from "next/script";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'KayneSign - Fan Wall',
-  description: 'Leave your message and signature for Kanye West',
+  title: "이세계 아이돌: 우왁굳 선언의 벽 ",
+  description: `이세계는 사라지고, ‘니 세계’만 남았다.
+우왁굳에게 남기는 진심의 메시지 — 지금 당신의 세계를 증명하라. 카녜부터 쿠팍까지, 미발매 라이브와 함께 이세계 아이돌에게 서명하라.`,
   openGraph: {
-    title: '[YE UNRELEASED LIVE] FUCK COUPXXX COME KAYNE WEST',
-    description: 'Kanye West Fan Wall - Leave your message and signature',
+    title: "이세계 아이돌: 우왁굳 선언의 벽 ",
+    description: `이세계는 사라지고, ‘니 세계’만 남았다.
+우왁굳에게 남기는 진심의 메시지 — 지금 당신의 세계를 증명하라. 카녜부터 쿠팍까지, 미발매 라이브와 함께 이세계 아이돌에게 서명하라.`,
     images: [
       {
-        url: '/gggggggg.png',
+        url: "/gggggggg.png",
         width: 1200,
         height: 630,
-        alt: 'Kanye West Bully',
-      }
+        alt: "Kanye West Bully",
+      },
     ],
-    type: 'website',
-    locale: 'en_US',
-    siteName: 'Bully',
+    type: "website",
+    locale: "en_US",
+    siteName: "Bully",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: '[YE UNRELEASED LIVE] FUCK COUPXXX COME KAYNE WEST',
-    description: 'Kanye West Fan Wall - Leave your message and signature',
-    images: ['/gggggggg.png'],
-    creator: '@donquiniku',
+    card: "summary_large_image",
+    title: "이세계 아이돌: 우왁굳 선언의 벽 ",
+    description: `이세계는 사라지고, ‘니 세계’만 남았다.
+우왁굳에게 남기는 진심의 메시지 — 지금 당신의 세계를 증명하라. 카녜부터 쿠팍까지, 미발매 라이브와 함께 이세계 아이돌에게 서명하라.`,
+    images: ["/gggggggg.png"],
+    creator: "@donquiniku",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <head>
-        <title>[YE UNRELEASED LIVE] FUCK COUPXXX COME KAYNE WEST</title>
+        <title>이세계 아이돌: 우왁굳 선언의 벽 </title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Kanye West Fan Wall - Leave your message and signature" />
+        <meta
+          name="description"
+          content="이세계는 사라지고, ‘니 세계’만 남았다.
+우왁굳에게 남기는 진심의 메시지 — 지금 당신의 세계를 증명하라. 카녜부터 쿠팍까지, 미발매 라이브와 함께 이세계 아이돌에게 서명하라."
+        />
       </head>
       <body className="bg-black">
         {/* Google Tag Manager 스크립트 */}
@@ -64,5 +71,5 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-  )
-} 
+  );
+}
