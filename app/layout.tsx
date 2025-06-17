@@ -49,6 +49,7 @@ export default function RootLayout({
           content="이세계는 사라지고, ‘니 세계’만 남았다.
 우왁굳에게 남기는 진심의 메시지 — 지금 당신의 세계를 증명하라. 카녜부터 쿠팍까지, 미발매 라이브와 함께 이세계 아이돌에게 서명하라."
         />
+        <meta name="google-adsense-account" content="ca-pub-9777797973375984" />
       </head>
       <body className="bg-black">
         {/* Google Tag Manager 스크립트 */}
