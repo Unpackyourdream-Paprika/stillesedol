@@ -65,8 +65,9 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
                 "니세계만아이돌"
               </span>
             </div>
-            <p className="text-[24px] md:text-[30px] font-[700]">
-              🌀 ‘이’세계는 사라지고, ‘니’세계만 남았다?
+            <p className="text-[24px] md:text-[30px] font-[700] text-center">
+              🌀 ‘이’세계는 사라지고, <br className="block md:hidden" />
+              ‘니’세계만 남았다?
             </p>
             <p className="text-[18px] md:text-[26px] font-[700]">
               ‘이세돌’에게 진실을 묻습니다.
@@ -86,7 +87,9 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
             </p>
 
             <p className="text-[16px] md:text-[20px] font-[700] text-center">
-              서명 수가 일정 기준을 넘을 때마다, 우리는 공식 해명을 요청합니다.
+              서명 수가 일정 기준을 넘을 때마다,
+              <br className="block md:hidden" />
+              우리는 공식 해명을 요청합니다.
             </p>
 
             <br />
@@ -104,7 +107,7 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
                 <p className="text-left">✅ 1,000명</p>
                 <p className="text-right">
                   <span className="font-[600]">
-                    🎵 IP 무단 사용 음원·2차 창작 저작권 사용 절차 공개
+                    🎵 IP 무단 사용 저작권 사용 절차 공개
                   </span>
                 </p>
               </div>
@@ -112,7 +115,7 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
                 <p className="text-left">✅ 2,000명</p>
                 <p className="text-right">
                   <span className="font-[600]">
-                    🎬 제작/금전 투명성 지원 기준·자금 사용 내역 공개
+                    🎬 금전/제작 투명 지원 기준·자금 내역 공개
                   </span>
                 </p>
               </div>
@@ -120,7 +123,7 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
                 <p className="text-left">✅ 3,000명</p>
                 <p className="text-right">
                   <span className="font-[600]">
-                    🎧 DLC/사과 논란 DLC 제외 배경 및 공식 입장
+                    ⚖️ 고소/운영 문제 고소 기준·운영 원칙 공개
                   </span>
                 </p>
               </div>
@@ -136,7 +139,7 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
                 <p className="text-left">✅ 5,000명</p>
                 <p className="text-right">
                   <span className="font-[600]">
-                    🤝 팬덤 과열/비하 팬덤 가이드라인 및 책임 표명
+                    🤝 팬덤 비하/과열 팬덤 운영 가이드·책임 표명
                   </span>
                 </p>
               </div>
