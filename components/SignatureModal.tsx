@@ -272,6 +272,8 @@ const SignatureModal = ({
     }
 
     if (!newComment.trim() || !username.trim()) {
+      console.log('newComment:', newComment)
+      console.log('username:', username)
       alert("댓글 내용을 입력해주세요.");
       return;
     }
