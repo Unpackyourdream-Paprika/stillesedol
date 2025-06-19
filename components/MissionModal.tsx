@@ -67,75 +67,46 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
             </div>
             <p className="text-[24px] md:text-[30px] font-[700] text-center">
               🌀 ‘이’세계는 사라지고, <br className="block md:hidden" />
-              ‘니’세계만 남았다?
+              <span className="pl-4 md:pl-0"> ‘니’세계만 남았다.</span>
             </p>
-            <p className="text-[18px] md:text-[26px] font-[700]">
-              ‘이세돌’에게 진실을 묻습니다.
-            </p>
-
-            <p className="text-[16px] md:text-[20px] font-[700] text-center">
-              서명은 해명을 요구할 수 있는 자격입니다.
+            <p className="text-[16px] md:text-[26px] font-[700]">
+              ‘이세돌’, 그리고 ‘우왁굳’에게 묻습니다.
             </p>
 
-            <p className="text-[16px] md:text-[20px] font-[700] text-center">
-              서명 수가 일정 기준을 넘을 때마다,
-              <br className="block md:hidden" />
-              우리는 공식 해명을 요청합니다.
+            <p className="text-[16px] md:text-[26px] font-[700]">
+              이 수많은 논란 앞에, 지금의 침묵이 최선입니까?
+            </p>
+
+            <p className="text-[16px] md:text-[26px] font-[700] text-center">
+              우리는 침묵하지 않겠습니다.
+              <br className="block " />
+              우리는 서명을 통해, 공식 해명을 요구합니다.
             </p>
 
             <div className="w-full flex flex-col gap-3 min-w-[350px] md:gap-4 rounded-[16px] bg-[#5a5a5a] p-4 md:p-6">
-              <div className="flex justify-between w-full">
-                <p className="text-left">📌 단계별 해명 요구안</p>
-                <p className="text-right">
+              <div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-start">
+                <p className="font-semibold text-white">
+                  📌 단계별 해명 요구안
+                </p>
+                <p className="text-white text-sm md:text-base md:text-right md:max-w-[60%]">
                   <span className="font-[600]">
                     서명 달성 논란 주제 요구 내용
                   </span>
                 </p>
               </div>
-              <div className="flex justify-between w-full">
-                <p className="text-left">✅ 1,000명</p>
-                <p className="text-right">
+              <div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-start">
+                <p className="font-semibold text-white">✅ 1,000명</p>
+                <p className="text-white text-sm md:text-base md:text-right md:max-w-[65%]">
                   <span className="font-[600]">
-                    🎵 IP 무단 사용 저작권 사용 절차 공개
-                  </span>
-                </p>
-              </div>
-              <div className="flex justify-between w-full">
-                <p className="text-left">✅ 2,000명</p>
-                <p className="text-right">
-                  <span className="font-[600]">
-                    🎬 금전/제작 투명 지원 기준·자금 내역 공개
-                  </span>
-                </p>
-              </div>
-              <div className="flex justify-between w-full">
-                <p className="text-left">✅ 3,000명</p>
-                <p className="text-right">
-                  <span className="font-[600]">
-                    ⚖️ 고소/운영 문제 고소 기준·운영 원칙 공개
-                  </span>
-                </p>
-              </div>
-              <div className="flex justify-between w-full">
-                <p className="text-left">✅ 4,000명</p>
-                <p className="text-right">
-                  <span className="font-[600]">
-                    ⚖️ 커뮤니티 고소/검열 고소 기준 및 운영 원칙 명시
-                  </span>
-                </p>
-              </div>
-              <div className="flex justify-between w-full">
-                <p className="text-left">✅ 5,000명</p>
-                <p className="text-right">
-                  <span className="font-[600]">
-                    🤝 팬덤 비하/과열 팬덤 운영 가이드·책임 표명
+                    금전적·정신적으로 피해를 입은 이들을 대신해, 당신들의 입으로
+                    공식 사과를 받아내겠습니다. 더 이상 가상의 세계 뒤에 숨을 수
+                    없습니다.
                   </span>
                 </p>
               </div>
             </div>
             <div className="text-center">
               <p className="font-[400]">🎯 지금 서명하고, 책임을 요구하세요.</p>
-              {/* <p>#칸붕아돌아와</p> */}
             </div>
             <div
               onClick={() => {
