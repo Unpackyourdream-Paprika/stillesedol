@@ -273,7 +273,7 @@ const SignatureModal = ({
       }
     }
 
-    alert(username)
+    alert(getUsername())
 
     // if (!newComment.trim() || !username.trim()) {
     //   console.log('newComment:', newComment)
