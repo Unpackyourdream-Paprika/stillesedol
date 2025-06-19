@@ -266,8 +266,10 @@ const SignatureModal = ({
       const savedUsername = getUsername();
       if (savedUsername) {
         setUsername(savedUsername);
+        alert(`savedUsername:${savedUsername}`)
       } else {
         setUsername(await getRandomName());
+        alert(`getRandomName:${await getRandomName()}`)
       }
     }
 
@@ -282,7 +284,7 @@ const SignatureModal = ({
       return;
     }
     if (!username.trim()) {
-      alert("유저 닉네임이 없습니다.");
+      alert("닉네임이 없습니다.");
       return;
     }
 
