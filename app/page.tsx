@@ -128,7 +128,7 @@ export default function Home() {
           <div className="relative flex items-center justify-center w-full gap-2 md:gap-4">
             {/* Left GIF */}
             <Link
-              href="https://smartstore.naver.com/donquiniku/products/11811352642?nl-query=%EB%8F%88%ED%82%A4%EB%8B%88%EC%BF%A0&nl-ts-pid=jaabhwqpts0ssa4fh%2B4sssssshh-123807&NaPm=ct%3Dmc0e8ff4%7Cci%3D1588bc724c59b137016654459c504e45d8cdeb79%7Ctr%3Dsls%7Csn%3D12250017%7Chk%3D1db6ddc1ca32c72ec609b1c42760841b9db0fc37"
+              href="https://crocslover.store/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-shrink-0 hidden md:block"
@@ -162,7 +162,7 @@ export default function Home() {
 
             {/* Right GIF */}
             <Link
-              href="https://smartstore.naver.com/donquiniku/products/11811352642?nl-query=%EB%8F%88%ED%82%A4%EB%8B%88%EC%BF%A0&nl-ts-pid=jaabhwqpts0ssa4fh%2B4sssssshh-123807&NaPm=ct%3Dmc0e8ff4%7Cci%3D1588bc724c59b137016654459c504e45d8cdeb79%7Ctr%3Dsls%7Csn%3D12250017%7Chk%3D1db6ddc1ca32c72ec609b1c42760841b9db0fc37"
+              href="https://crocslover.store/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-shrink-0 hidden md:block"
@@ -181,7 +181,7 @@ export default function Home() {
         <div className="flex items-center justify-center w-full gap-2 p-4 bg-black md:hidden">
           {/* Left GIF */}
           <Link
-            href="https://smartstore.naver.com/donquiniku/products/11852523127"
+            href="https://crocslover.store/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-shrink-0"
@@ -197,7 +197,7 @@ export default function Home() {
           </Link>
 
           <Link
-            href="https://smartstore.naver.com/donquiniku/products/11854994885"
+            href="https://crocslover.store/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-shrink-0"
