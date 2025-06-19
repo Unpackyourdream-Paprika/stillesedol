@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { getSignatureById } from "@/lib/signature";
-import { getUserId, getUsername, hasValidUsername } from "@/lib/user";
+import { getUserId, getUsername, hasValidUsername ,setUsername } from "@/lib/user";
 import { supabase } from "@/lib/supabase";
 import Preview from "./InstagramStoryShare";
 
@@ -42,11 +42,12 @@ const SignatureModal = ({
   const [signature, setSignature] = useState<Signature | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
-  const [username, setUsername] = useState("");
+  const [username, setUsernameState] = useState("");
   const [loading, setLoading] = useState(true);
   const [commentLoading, setCommentLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [liked, setLiked] = useState(false);
+  const [isUsernameFetching, setIsUsernameFetching] = useState(false);
 
   // useRef를 단일 객체로 변경
   const previewRef = useRef<{
@@ -77,9 +78,28 @@ const SignatureModal = ({
   useEffect(() => {
     const savedUsername = getUsername();
     if (savedUsername) {
-      setUsername(savedUsername);
+      setUsernameState(savedUsername);
+    } else {
+      // 쿠키에 닉네임이 없으면 새로 생성
+      generateUsername();
     }
   }, []);
+
+  // 랜덤 닉네임 생성 함수
+    const generateUsername = async () => {
+      setIsUsernameFetching(true);
+      try {
+        // API 호출 대신 랜덤 닉네임 생성
+        const newUsername = await getRandomName();
+        setUsernameState(newUsername);
+        // 쿠키에 저장
+        setUsername(newUsername);
+      } catch (error) {
+        console.error("Error generating username:", error);
+      } finally {
+        setIsUsernameFetching(false);
+      }
+    };
 
   // 게시글 데이터 로드
   useEffect(() => {
@@ -265,10 +285,10 @@ const SignatureModal = ({
     if (!username.trim()) {
       const savedUsername = getUsername();
       if (savedUsername) {
-        setUsername(savedUsername);
+        setUsernameState(savedUsername);
         alert(`savedUsername:${savedUsername}`)
       } else {
-        setUsername(await getRandomName());
+        setUsernameState(await getRandomName());
         alert(`getRandomName:${await getRandomName()}`)
       }
     }
