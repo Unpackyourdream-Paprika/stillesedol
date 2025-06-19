@@ -271,10 +271,18 @@ const SignatureModal = ({
       }
     }
 
-    if (!newComment.trim() || !username.trim()) {
-      console.log('newComment:', newComment)
-      console.log('username:', username)
+    // if (!newComment.trim() || !username.trim()) {
+    //   console.log('newComment:', newComment)
+    //   console.log('username:', username)
+    //   alert("댓글 내용을 입력해주세요.");
+    //   return;
+    // }
+    if (!newComment.trim()) {
       alert("댓글 내용을 입력해주세요.");
+      return;
+    }
+    if (!username.trim()) {
+      alert("유저 닉네임이 없습니다.");
       return;
     }
 
