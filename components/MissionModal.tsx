@@ -83,7 +83,7 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
 
             <div className="w-full flex flex-col gap-3 min-w-[350px] mt-4 md:gap-4 rounded-[16px] bg-[#5a5a5a] p-4 md:p-6">
               <div className="flex flex-col gap-2 md:flex-col md:justify-between md:items-start">
-                <p className="text-xl font-semibold text-white">
+                <p className="w-full text-xl font-semibold text-center text-white">
                   ✅ 서명 10,000명 달성시
                 </p>
                 <p className="text-white text-sm md:text-xl w-full text-center md:max-w-[100%]">
