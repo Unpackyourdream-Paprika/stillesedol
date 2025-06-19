@@ -17,6 +17,7 @@ export function getUserId(): string {
 // 닉네임 가져오기 (쿠키에 저장된 닉네임 리턴)
 export function getUsername(): string | null {
   let username =  getCookie('username');
+  alert(`username: ${username}`)
   if (username?.includes('[')) {
     const val = JSON.parse(username)
     return val[0];
