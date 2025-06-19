@@ -65,13 +65,13 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
                 "니세계만아이돌"
               </span>
             </div>
-            <p className="text-[24px] md:text-[30px] font-[700] text-center">
+            {/* <p className="text-[24px] md:text-[30px] font-[700] text-center">
               🌀 ‘이’세계는 사라지고, <br className="block md:hidden" />
               <span className="pl-4 md:pl-0"> ‘니’세계만 남았다.</span>
             </p>
             <p className="text-[16px] md:text-[26px] font-[700]">
               ‘이세돌’, 그리고 ‘우왁굳’에게 묻습니다.
-            </p>
+            </p> */}
 
             <p className="text-[16px] md:text-[26px] font-[700]">
               이 수많은 논란 앞에, 지금의 침묵이 최선입니까?
@@ -89,8 +89,7 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
                 <p className="text-white text-sm md:text-xl w-full text-center md:max-w-[100%]">
                   <span className="font-[600]">
                     금전적·정신적으로 피해를 입은 이들을 대신해, <br /> 당신들의
-                    입으로 공식 사과를 받아내겠습니다. <br /> 더 이상 가상의
-                    세계 뒤에 숨을 수 없습니다.
+                    입으로 공식 사과를 받아내겠습니다.
                   </span>
                 </p>
               </div>
