@@ -34,7 +34,7 @@ export function setUsername(username: string): void {
 // 닉네임 유효성 확인 (닉네임이 존재하고 비어있지 않은지 확인)
 export function hasValidUsername(): boolean {
   const username = getUsername();
-  return !!username && username.trim() !== '';
+  return !!username && !username.trim();
 }
 
 // 쿠키 설정 함수
