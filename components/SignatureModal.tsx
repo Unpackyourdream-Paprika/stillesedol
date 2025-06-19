@@ -262,7 +262,7 @@ const SignatureModal = ({
     e.preventDefault();
 
     // 닉네임 필드가 비어있고 쿠키에 닉네임이 있으면 자동으로 설정
-    if (!username.trim() && hasValidUsername()) {
+    if (!username.trim()) {
       const savedUsername = getUsername();
       if (savedUsername) {
         setUsername(savedUsername);
