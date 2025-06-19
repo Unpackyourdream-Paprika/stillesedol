@@ -55,7 +55,7 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
             오늘 하루 보지 않기
           </label>
         </div>
-        <div className="w-full h-full mx-auto max-w-[600px] font-pretendart flex justify-center items-center pt-[100px] md:pt-0">
+        <div className="w-full h-full mx-auto max-w-[600px] font-pretendart flex justify-center items-center pt-[70px] pb-[14px] md:pt-0">
           <div className="flex flex-col items-center gap-2 pt-4">
             <div className="max-w-[110px] md:max-w-[150px] mx-auto ">
               <img src="/YE-1.png" alt="" />
@@ -78,34 +78,25 @@ export const MissionModal = ({ setOpenMission }: ModalPropData) => {
             </p>
 
             <p className="text-[16px] md:text-[26px] font-[700] text-center">
-              우리는 침묵하지 않겠습니다.
-              <br className="block " />
               우리는 서명을 통해, 공식 해명을 요구합니다.
             </p>
 
-            <div className="w-full flex flex-col gap-3 min-w-[350px] md:gap-4 rounded-[16px] bg-[#5a5a5a] p-4 md:p-6">
-              <div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-start">
-                <p className="font-semibold text-white">
-                  📌 단계별 해명 요구안
+            <div className="w-full flex flex-col gap-3 min-w-[350px] mt-4 md:gap-4 rounded-[16px] bg-[#5a5a5a] p-4 md:p-6">
+              <div className="flex flex-col gap-2 md:flex-col md:justify-between md:items-start">
+                <p className="text-xl font-semibold text-white">
+                  ✅ 서명 10,000명 달성시
                 </p>
-                <p className="text-white text-sm md:text-base md:text-right md:max-w-[60%]">
+                <p className="text-white text-sm md:text-xl w-full text-center md:max-w-[100%]">
                   <span className="font-[600]">
-                    서명 달성 논란 주제 요구 내용
-                  </span>
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 md:flex-row md:justify-between md:items-start">
-                <p className="font-semibold text-white">✅ 1,000명</p>
-                <p className="text-white text-sm md:text-base md:text-right md:max-w-[65%]">
-                  <span className="font-[600]">
-                    금전적·정신적으로 피해를 입은 이들을 대신해, 당신들의 입으로
-                    공식 사과를 받아내겠습니다. 더 이상 가상의 세계 뒤에 숨을 수
-                    없습니다.
+                    금전적·정신적으로 피해를 입은 이들을 대신해, <br /> 당신들의
+                    입으로 공식 사과를 받아내겠습니다. <br /> 더 이상 가상의
+                    세계 뒤에 숨을 수 없습니다.
                   </span>
                 </p>
               </div>
             </div>
-            <div className="text-center">
+
+            <div className="mt-4 text-center">
               <p className="font-[400]">🎯 지금 서명하고, 책임을 요구하세요.</p>
             </div>
             <div
